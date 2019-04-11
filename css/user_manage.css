@@ -62,3 +62,6 @@
 .home_right>button{
 	margin-top: 40px;
 }
+.reset_password{
+	display: none;
+}

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="utf-8"/>
+    <title>标准工时</title>
+    <link rel="icon" type="image/x-icon" href="image/logo.jpg"/>
+    <link rel="stylesheet" type="text/css" href="css/global.css"/>
+    <link rel="stylesheet" type="text/css" href="css/order_manage.css"/>
+    <script type="text/javascript" src="js/jquery-3.3.1.js"></script>
+    <script type="text/javascript" src="js/wm.js"></script>
+</head>
+<body>
+    <script type="text/javascript" src="js/header.js"></script>
+    <div class="home">
+        <div class="order_head wm_pack">
+            <input id="order_work" type="text" placeholder="请输入工单号"/>
+            <input id="order_number" type="text" placeholder="请输入料号"/>
+            <input id="order_center" class="wm_select" type="text" placeholder="请选择工作中心"/>
+            <input id="order_date" type="date" title="请选择排程日期"/>
+            <input id="order_urgent" class="wm_select" data-select="[{name: '急件',value: 1},{name: '非急件',value: 0}]" type="text"  placeholder="请选择是否急件"/>
+            <input id="order_delete" class="wm_select" data-select="[{name: '已删除工单',value: 1}]" type="text"  placeholder="可选择删除工单"/>
+            <button id="order_search_btn">查询</button>
+        </div>
+        <div class="order_body">
+            <input id="order_file" type="file"/>
+            <button class="order_fileBtn">导入</button>
+            <button class="order_upBtn">更新</button>
+            <button class="order_exportBtn">导出</button>
+        </div>
+        <div class="order_foot">
+            <table class="order_foot_table">
+                <thead class="order_foot_thead">
+                <tr>
+                    <th>工单编号</th>
+                    <th>物料编号</th>
+                    <th>工作顺序</th>
+                    <th>工序描述</th>
+                    <th>工序数量</th>
+                    <th>确认数量</th>
+                    <th>废品数量</th>
+                    <th>现有数量</th>
+                    <th>基本开工日期</th>
+                    <th>基本完工日期</th>
+                    <th>下达日期</th>
+                    <th>出货工作中心</th>
+                    <th>收货工作中心</th>
+                    <th>排程日期</th>
+                    <th>目标数量</th>
+                    <th>急件</th>
+                    <th>更新日期</th>
+                    <th>工单状态</th>
+                    <th>操作</th>
+                </tr>
+                </thead>
+                <tbody class="order_foot_tbody"></tbody>
+            </table>
+        </div>
+    </div>
+    <script src="js/order_manage.js"></script>
+</body>
+</html>

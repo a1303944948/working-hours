@@ -1,0 +1,98 @@
+.norm_head{
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+}
+.norm_body{
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+}
+.norm_head>button,.norm_body>button{
+    padding: 5px 10px;
+    border-radius: 4px;
+    font-size: 14px;
+    border: none;
+    background-color: #0D6FB8;
+    color: #ffffff;
+    position: relative;
+    top: 2px;
+    margin-left: 10px;
+}
+.norm_head>button:hover,.norm_body>button:hover{
+    background-color: #1B93EF;
+}
+.norm_head>button:active,.norm_body>button:active{
+    background-color: #0D6FB8;
+}
+.norm_foot{
+    width: 100%;
+    height: calc(100% - 100px);
+    padding: 10px;
+    box-sizing: border-box;
+}
+.norm_foot_table{
+    display:block;
+    width: 100%;
+    height: calc(100% - 40px);
+    border-collapse: collapse;
+}
+.norm_foot_thead{
+    display:table;
+    width:100%;
+    table-layout:fixed;
+    border-collapse: collapse;
+}
+.norm_foot_thead>tr>th{
+    height: 40px;
+    background-color: #f0f0f0;
+    border: 1px #a4a4a4 solid;
+    font-size: 14px;
+}
+.norm_foot_tbody{
+    display:block;
+    width: 100%;
+    height: calc(100% - 40px);
+    overflow-y: auto;
+    overflow-x: hidden;
+    border-bottom: 1px #a4a4a4 solid;
+    border-right: 1px #a4a4a4 solid;
+    border-left: 1px #a4a4a4 solid;
+    box-sizing: border-box;
+}
+.norm_foot_tbody>tr{
+    display:table;
+    width:100%;
+    table-layout:fixed;
+    border-collapse: collapse;
+}
+.norm_foot_tbody>tr:nth-child(even){
+    background-color: #f0f0f0;
+}
+.norm_foot_tbody>tr>td:nth-child(1){
+    border-left: none;
+}
+.norm_foot_tbody>tr>td{
+    height: 40px;
+    text-align: center;
+    border: 1px #a4a4a4 solid;
+    border-top: none;
+    font-size: 14px;
+}
+.norm_foot_edit{
+    padding: 7px 30px;
+    border-radius: 4px;
+    font-size: 14px;
+    border: none;
+    background-color: #009688;
+    color: #ffffff;
+    margin-top: 12px;
+    position: absolute;
+    right: 60px;
+}
+.norm_foot_edit:hover{
+    background-color: #00C0AD;
+}
+.norm_foot_edit:active{
+    background-color: #009688;
+}

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="utf-8"/>
+	<title>用户管理</title>
+	<link rel="icon" type="image/x-icon" href="image/logo.jpg"/>
+	<link rel="stylesheet" type="text/css" href="css/global.css"/>
+	<link rel="stylesheet" type="text/css" href="css/user_manage.css"/>
+	<script type="text/javascript" src="js/wm.js"></script>
+</head>
+<body>
+	<script type="text/javascript" src="js/header.js"></script>
+	<div class="home">
+		<div class="home_left"></div>
+		<div class="home_right wm_pack">
+			<p>用户管理</p>
+			<span>工作中心<b>*</b>：</span><input id="user_manage_work" class="wm_select" type="text" placeholder="请选择工作中心..."/><br/>
+			<span>用户账号<b>*</b>：</span><input id="user_manage_code" onkeyup="value=value.replace(/[\W]/g,'')" type="text" placeholder="请输入用户账号"/><br/>
+			<span>用户名称<b>*</b>：</span><input id="user_manage_name" type="text" placeholder="请输入用户名称"/><br/>
+			<span>用户等级<b>*</b>：</span><input id="user_manage_level" class="wm_select" data-select="[{name: '可查看报表',value: 0},{name: '仅能报工',value: 1},{name: '可报工可签收',value: 2},{name: '可修改基础数据',value: 3}]" type="text" placeholder="请选择用户等级..."/><br/>
+			<span class="reset_password">重置密码 &nbsp;：</span><button id="reset_password" class="reset_password wmButton" style="margin-top: 20px;">重置密码</button><br class="reset_password" />
+			<span>停&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;用 &nbsp;：</span><input id="user_manage_detele" type="checkbox"/><br/>
+			<button id="creat" class="wmButton" style="margin-left: 150px; margin-right: 10px;">创建</button>
+			<button id="submit" class="wmButton">保存</button>
+		</div>
+	</div>
+	<script type="text/javascript" src="js/user_manage.js"></script>
+</body>
+</html>

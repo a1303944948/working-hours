@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="zh">
 <head>
 	<meta charset="utf-8"/>
 	<title>鸿丰集团工时系统</title>
@@ -15,8 +15,8 @@
 			width: 100%;
 			height: 100%;
 			position: absolute;
-			top: 0px;
-			left: 0px;
+			top: 0;
+			left: 0;
 		}
 		.land_back_two{
 			width: 600px;
@@ -45,19 +45,31 @@
 			text-align: center;
 		}
 		.land_back_two_int{
-			width: 200px !important;
-			height: 30px !important;
+			width: 300px !important;
+			height: 40px !important;
 			padding: 10px !important;
 			font-size: 16px;
-			border-radius: 7px !important;
 			border-left: none !important;
 			border-right: none !important;
 			border-top: none !important;
 			border-bottom: 1px #e5e5e5 solid !important;
 			background-color: rgba(0,0,0,0) !important;
+			margin-top: 10px;
 			color: #e5e5e5;
 			position: relative;
 			top: -30px;
+		}
+		.land_back_two_int::-webkit-input-placeholder{
+			color: #e5e5e5;
+		}
+		.land_back_two_int::-moz-placeholder{   /* Mozilla Firefox 19+ */
+			color: #e5e5e5;
+		}
+		.land_back_two_int:-moz-placeholder{    /* Mozilla Firefox 4 to 18 */
+			color: #e5e5e5;
+		}
+		.land_back_two_int:-ms-input-placeholder{  /* Internet Explorer 10-11 */
+			color: #e5e5e5;
 		}
 		.land_back_two_btn{
 			width: 100px;
@@ -83,73 +95,80 @@
 			color: #f5f5f5;
 			border-radius: 5px;
 		}
-		.land_back_three{
-			width: 100%;
-			height: 100%;
-			position: fixed;
-			z-index: 999;
-			top: 0px;
-			left: 0px;
-		}
 	</style>
 </head>
 <body>
 	<div class="land_back_one">
-		<canvas id="land_back_one_canvas"></canvas>
+		<canvas id="land_back_one_canvas">
+			您的浏览器暂不支持canvas动画，请升级更高版本浏览器或使用谷歌（火狐）浏览器查看；
+		</canvas>
 	</div>
 	<div class="land_back_two">
 		<div class="land_back_two_title">鸿丰集团工时系统</div>
 		<div class="land_back_two_body">
-			<input class="land_back_two_int" type="text" placeholder="请输入用户名..."/><br/>
-			<input class="land_back_two_int" type="password" placeholder="请输入密码..."/><br/>
+			<input class="land_back_two_int land_back_two_user" type="text" placeholder="请输入用户名..."/><br/>
+			<input class="land_back_two_int land_back_two_pass" type="password" placeholder="请输入密码..."/><br/>
 			<button class="land_back_two_btn">登 &nbsp;&nbsp;录</button>
 		</div>
 	</div>
 	<script type="text/javascript">
-
+		let URLS = 'http://10.1.8.36:8080/calculatesalary';
 		c('land_back_two_btn')[0].onclick = function(){
-			if(c('land_back_two_int')[0].value == '1111'){
-				sessionStorage.menu = 1;
-				window.location.href = 'index.html';
-			}else{
-				alern('登录码错误');
+			let landBackTwoUser = c('land_back_two_user')[0].value;
+			let landBackTwoPass = c('land_back_two_pass')[0].value;
+			if(landBackTwoUser === "" || landBackTwoUser === null || landBackTwoUser === undefined){
+				alern('用户名不能为空！');
+				return false;
 			}
-		}
+			if(landBackTwoPass === "" || landBackTwoPass === null || landBackTwoPass === undefined){
+				alern('密码不能为空！');
+				return false;
+			}
+			ajax('post',URLS + '/jf/zdbg/check/login.json','userId=' + landBackTwoUser + '&password=' + landBackTwoPass,function(data){
+				if(data.result === 10001){
+					sessionStorage.loginUserName = JSON.stringify(data.userInfo);
+					window.location.href = 'index.html?menuid=100000';
+				}else{
+					alern(data.text);
+				}
+			},'','json');
+		};
 		window.onkeyup = function(e){
-			if(e.keyCode == 13){
+			if(e.keyCode === 13){
 				c('land_back_two_btn')[0].click();
-			};
-		}
+			}
+		};
 
-		var bear = c('land_back_one')[0];
-		var Width = bear.clientWidth;
-		var Height = bear.clientHeight;
+		let bear = c('land_back_one')[0];
+		let Width = bear.clientWidth;
+		let Height = bear.clientHeight;
 
-		var canvas = d('land_back_one_canvas');
-		var context = canvas.getContext('2d');
+		let canvas = d('land_back_one_canvas');
+		let context = canvas.getContext('2d');
 
 		canvas.width = Width;
 		canvas.height = Height;
-		var col = ['#90C320','#0D6FB8','#FFFFFF'];	//圆的颜色
-		var record = [];	//记录圆的状态;
-		var timore;			//时间记录仪保存变量;
+		let col = ['#90C320','#0D6FB8','#FFFFFF'];	//圆的颜色
+		let record = [];	//记录圆的状态;
+		let TiMore;			//时间记录仪保存变量;
 
 		function start(cxt,x,y,num){
-			for(var i = 0; i < num; i++){
-				var radius = parseInt(Math.random()*6);
-				var color = col[parseInt(Math.random()*100%3)];
+			for(let i = 0; i < num; i++){
+				let radius = parseInt(Math.random()*6);
+				let color = col[parseInt(Math.random()*100%3)];
 				cxt.beginPath();
 				cxt.arc(x,y,radius,0,2*Math.PI);
 				cxt.fillStyle = color;
+				let vx,vy;
 				if(Math.random() < 0.5){
-					var vx = x+parseInt(Math.random()*30);
-					var vy = y+parseInt(Math.random()*30);
+					vx = x+parseInt(Math.random()*30);
+					vy = y+parseInt(Math.random()*30);
 				}else{
-					var vx = x-parseInt(Math.random()*30);
-					var vy = y-parseInt(Math.random()*30);
+					vx = x-parseInt(Math.random()*30);
+					vy = y-parseInt(Math.random()*30);
 				}
 				cxt.fill();
-				var recordObject = new Object();
+				let recordObject = {};
 				recordObject.x = x;
 				recordObject.y = y;
 				recordObject.radius = radius;
@@ -166,12 +185,12 @@
 			cxt.fill();
 		}
 		document.onmousemove = function(e){
-			clearInterval(timore);
-			var ox = e.clientX;
-			var oy = e.clientY;
+			clearInterval(TiMore);
+			let ox = e.clientX;
+			let oy = e.clientY;
 			start(context,ox,oy,20);
 			context.clearRect(0,0,Width,Height);
-			for(var i = 0; i < record.length; i++){
+			for(let i = 0; i < record.length; i++){
 				if(record[i].x < record[i].vx){
 					record[i].x = record[i].x + 1;
 					if(record[i].y > record[i].vy){
@@ -193,9 +212,9 @@
 				}
 			}
 
-			timore = setInterval(function(){
+			TiMore = setInterval(function(){
 				context.clearRect(0,0,Width,Height);
-				for(var i = 0; i < record.length; i++){
+				for(let i = 0; i < record.length; i++){
 					if(record[i].x < record[i].vx){
 						record[i].x = record[i].x + 1;
 						if(record[i].y > record[i].vy){
@@ -214,8 +233,8 @@
 						showStart(context,record[i].x,record[i].y,record[i].radius,record[i].color);
 					}else{
 						record.splice(i,1);
-						if(record.length == 0){
-							clearInterval(timore);
+						if(record.length === 0){
+							clearInterval(TiMore);
 						}
 					}
 				}
