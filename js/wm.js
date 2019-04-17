@@ -190,6 +190,16 @@ function loadingClear(){
 	body.removeChild(load);
 }
 
+//阻止浏览器默认事件
+function BlockDefault(e){
+	if(e && e.preventDefault){
+		e.preventDefault();
+	}else{//IE阻止默认事件
+		window.event.returnValue = false;
+		return false;
+	}
+}
+
 //ajax请求
 function ajax(type,url,data,succ,error,json,header,async){
 	let xhr = new XMLHttpRequest ();
@@ -392,12 +402,7 @@ function WmCheckSelect(){
 			list.className = 'wm_check_item_list';
 			list.innerHTML = '<input class="wm_check_item_list_check" type="checkbox" data-index="'+wmCheckArray[j].index+'" data-value="'+wmCheckArray[j].value+'" data-name="'+wmCheckArray[j].name+'"/>' + wmCheckArray[j].name;
 			list.onmousedown = function(e){
-				if(e && e.preventDefault){
-					e.preventDefault();
-				}else{//IE阻止默认事件
-					window.event.returnValue = false;
-					return false;
-				}
+				BlockDefault(e);
 			};
 			div.appendChild(list);
 		}
@@ -449,12 +454,7 @@ function WmCheckSelect(){
 						c('wm_check')[that.dataset.index].value = wmCheckSumArrView.join(',');
 						c('wm_check')[that.dataset.index].setAttribute('data-value',JSON.stringify(wmCheckSumArr));
 					}
-					if(e && e.preventDefault){
-						e.preventDefault();
-					}else{//IE阻止默认事件
-						window.event.returnValue = false;
-						return false;
-					}
+					BlockDefault(e);
 				}
 			})(i)
 		}

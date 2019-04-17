@@ -13,7 +13,6 @@
     <div class="home">
         <div class="norm_head">
             <input id="norm_search" type="text" placeholder="请输入工单号"/>
-            <input id="norm_no" class="wm_select" type="text" placeholder="请选择工作顺序"/>
             <button id="norm_search_btn">查询</button>
         </div>
         <div class="norm_foot">
@@ -44,22 +43,29 @@
                         <th>标准工时（秒）</th>
                         <th>准备工时合计（分）</th>
                         <th>标准工时合计（秒）</th>
+                        <th>人均工时（秒）</th>
                         <th>作业员</th>
                     </tr>
                     </thead>
                     <tbody class="reporting_foot_tbody">
-                    <tr>
-                        <td style="position: relative;"><input id="section" class="wm_select" placeholder="请选择工段..." type="text"/></td>
-                        <td id="reporting_foot_ready"></td>
-                        <td id="reporting_foot_norm"></td>
-                        <td id="reporting_foot_ready_total"></td>
-                        <td id="reporting_foot_norm_total"></td>
-                        <td style="position: relative;"><input id="operator" class="wm_check" placeholder="请选择作业员..." type="text"></td>
-                    </tr>
+                        <tr>
+                            <td style="position: relative;"><input id="section" class="wm_select" placeholder="请选择工段..." type="text"/></td>
+                            <td id="reporting_foot_ready"></td>
+                            <td id="reporting_foot_norm"></td>
+                            <td id="reporting_foot_ready_total"></td>
+                            <td id="reporting_foot_norm_total"></td>
+                            <td id="per_caPita">0</td>
+                            <td style="position: relative;"><textarea id="operator" readonly="readonly" placeholder="请选择作业员..."></textarea></td>
+                        </tr>
                     </tbody>
                 </table>
             </div>
+            <button id="norm_foot_btn">提交</button>
         </div>
+    </div>
+    <div class="operator_fixed">
+        <div class="operator_fixed_body"></div>
+        <div class="operator_fixed_body_view"></div>
     </div>
     <script src="js/reporting_goods.js"></script>
 </body>
