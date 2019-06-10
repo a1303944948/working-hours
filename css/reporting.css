@@ -3,12 +3,7 @@
     padding: 10px;
     box-sizing: border-box;
 }
-.order_body{
-    width: 100%;
-    padding: 10px;
-    box-sizing: border-box;
-}
-.order_head>button,.order_body>button{
+.order_head>button{
     padding: 5px 10px;
     border-radius: 4px;
     font-size: 14px;
@@ -19,10 +14,10 @@
     top: 2px;
     margin-left: 10px;
 }
-.order_head>button:hover,.order_body>button:hover{
+.order_head>button:hover{
     background-color: #1B93EF;
 }
-.order_head>button:active,.order_body>button:active{
+.order_head>button:active{
     background-color: #0D6FB8;
 }
 .order_foot{
@@ -52,7 +47,7 @@
 .order_foot_tbody{
     display:block;
     width: 100%;
-    height: calc(100% - 50px);
+    height: 100%;
     overflow-y: auto;
     overflow-x: hidden;
     border-bottom: 1px #a4a4a4 solid;
@@ -73,11 +68,17 @@
     border-left: none;
 }
 .order_foot_tbody>tr>td{
-    height: 40px;
+    height: 80px;
     text-align: center;
     border: 1px #a4a4a4 solid;
     border-top: none;
     font-size: 14px;
+}
+.order_foot_tbody>tr>td>div{
+    width: 100%;
+    height: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
 }
 .order_foot_tbody>tr>td>input[type='date']{
     width: 100%;

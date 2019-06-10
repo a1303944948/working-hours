@@ -72,11 +72,17 @@ c('order_upBtn')[0].onclick = function(){
 
 //导出事件
 c('order_exportBtn')[0].onclick = function(){
-    location.href = 'http://10.1.8.36:8080/calculatesalary/jf/zdbg/workorder/export.json';
+    location.href = URLS + '/jf/zdbg/workorder/export.json';
 };
 
 //搜索事件
 d('order_search_btn').onclick = function(){
+    WmPageMarkStart(JSON.parse(d('page_mark').dataset.length)[1]);
+    /*ajax('post',URLS + '/jf/zdbg/workorder/list.json','workorderCode=' + orderWork + '&materialsCode=' + orderNumber + '&workcenterCode=' + orderCenter + '&scheduleDate=' + orderDate + '&urgentNum=' + orderUrgent + '&deleted=' + orderDelete,function(data){
+        normFootTbodyAppend(data.objs, orderDelete);
+    },'','json');*/
+};
+function WmPageMarkStart(num){
     let orderWork = d('order_work').value;
     let orderNumber = d('order_number').value;
     let orderCenter = d('order_center').value;
@@ -87,10 +93,19 @@ d('order_search_btn').onclick = function(){
     }
     let orderDelete = d('order_delete').dataset.value;
     orderDelete !== ''&&orderDelete !== undefined?orderDelete = d('order_delete').dataset.value: orderDelete = '0';
-    ajax('post',URLS + '/jf/zdbg/workorder/list.json','workorderCode=' + orderWork + '&materialsCode=' + orderNumber + '&workcenterCode=' + orderCenter + '&scheduleDate=' + orderDate + '&urgentNum=' + orderUrgent + '&deleted=' + orderDelete,function(data){
+    loading('加载中');
+    let pageMark = d('page_mark');
+    let pageMarkLength = JSON.parse(d('page_mark').dataset.length);
+    //http://10.1.8.36:8080/calculatesalary
+    ajax('post',URLS + '/jf/zdbg/workorder/list.json','workorderCode=' + orderWork + '&materialsCode=' + orderNumber + '&workcenterCode=' + orderCenter + '&scheduleDate=' + orderDate + '&urgentNum=' + orderUrgent + '&deleted=' + orderDelete + '&pageNumber=' + num + '&pageSize=' + pageMarkLength[2],function(data){
+        log(data);
+        pageMarkLength[0] = data.total;
+        pageMark.setAttribute('data-length',JSON.stringify(pageMarkLength));
+        WmPageMark();
         normFootTbodyAppend(data.objs, orderDelete);
-    },'','json');
-};
+        loadingClear();
+    },'','json')
+}
 
 function userSelect(){
     let orderCenter = d('order_center');
@@ -125,8 +140,8 @@ function normFootTbodyAppend(obj,num){
             let tdg = creat('td');
             let tdh = creat('td');
             let tdi = creat('td');
-            let tdj = creat('td');
-            let tdk = creat('td');
+            // let tdj = creat('td');
+            // let tdk = creat('td');
             let tdl = creat('td');
             let tdm = creat('td');
             let tdn = creat('td');
@@ -145,8 +160,8 @@ function normFootTbodyAppend(obj,num){
             tdg.innerHTML = obj[i].confirmedNum;
             tdh.innerHTML = obj[i].scrapsNum;
             tdi.innerHTML = obj[i].existingNum;
-            tdj.innerHTML = obj[i].basicStartDate;
-            tdk.innerHTML = obj[i].basicEndDate;
+            //tdj.innerHTML = obj[i].basicStartDate;
+           // tdk.innerHTML = obj[i].basicEndDate;
             tdl.innerHTML = obj[i].releaseDate;
             tdm.innerHTML = obj[i].workcenterCode;
             tdn.innerHTML = obj[i].receivingWorkcenter;
@@ -160,7 +175,7 @@ function normFootTbodyAppend(obj,num){
             }else{
                 tdt.innerHTML = '<button onclick="edit(this,'+i+',0)">修改</button> <button onclick="edit(this,'+i+',1)">删除</button>';
             }
-            setAppend(tr,[tda,tdb,/*tdc,*/tdd,tde,tdf,tdg,tdh,tdi,tdj,tdk,tdl,tdm,tdn,tdo,tdp,tdq,tdr,tds,tdt]);
+            setAppend(tr,[tda,tdb,/*tdc,*/tdd,tde,tdf,tdg,tdh,tdi,/*tdj,tdk,*/tdl,tdm,tdn,tdo,tdp,tdq,tdr,tds,tdt]);
             orderFootTbody.appendChild(tr);
         }
     }else{
@@ -183,6 +198,7 @@ function edit(that,index,num){
         obj.deleted = num;
     }
     let objectify = encodeURIComponent(JSON.stringify(obj));
+    let orderDelete = d('order_delete').dataset.value;
     log(objectify);
     ajax('post',URLS + '/jf/zdbg/workorder/updatesigle.json','obj=' + objectify,function(data){
         log(data);

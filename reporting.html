@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="utf-8"/>
+    <title>报工查询</title>
+    <link rel="icon" type="image/x-icon" href="image/logo.jpg"/>
+    <link rel="stylesheet" type="text/css" href="css/global.css"/>
+    <link rel="stylesheet" type="text/css" href="css/reporting.css"/>
+    <script type="text/javascript" src="js/wm.js"></script>
+</head>
+<body>
+    <script type="text/javascript" src="js/header.js"></script>
+    <div class="home">
+        <div class="order_head wm_pack">
+            <input id="order_work" type="text" placeholder="请输入工单号"/>
+            <input id="order_center" class="wm_select" type="text" placeholder="请选择工作中心"/>
+            <input id="order_operator" type="text" placeholder="请输入作业员"/>
+            <input id="order_start_date" onmouseover="this.setAttribute('type','date')" type="text" placeholder="请选择开始日期"/>
+            <input id="order_end_date" onmouseover="this.setAttribute('type','date')" type="text" placeholder="请选择结束日期"/>
+            <input id="order_status" class="wm_select" data-select="[{name: '报工',value: 0},{name: '审核',value: 1},{name: '签收',value: 2}]" data-type="no_default" type="text"/>
+            <button id="order_search_btn">查询</button>
+        </div>
+        <div class="order_foot">
+            <table class="order_foot_table">
+                <thead class="order_foot_thead">
+                <tr>
+                    <th>工单编号</th>
+                    <th>物料编号</th>
+                    <th>工序顺序</th>
+                    <th>工序描述</th>
+                    <th>工序数量</th>
+                    <th>工段序号</th>
+                    <th>工段</th>
+                    <th>工时</th>
+                    <th>作业员</th>
+                    <th>报工日期</th>
+                    <th>审核日期</th>
+                    <th>签收日期</th>
+                    <th>状态</th>
+                </tr>
+                </thead>
+                <tbody class="order_foot_tbody"></tbody>
+            </table>
+        </div>
+        <div id="page_mark" class="wm_pagemark" data-length="[0,1,20]" data-pagemark=""></div>
+    </div>
+    <script src="js/reporting.js"></script>
+</body>
+</html>

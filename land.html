@@ -34,10 +34,10 @@
 			text-align: center;
 			font-size: 54px;
 			letter-spacing: 2px;
-			font-family: '华文楷体';
+			font-family: '华文楷体',serif;
 			color: #ffffff;
 			cursor: default;
-			text-shadow: 0px 0px 10px #ffffff;
+			text-shadow: 0 0 10px #ffffff;
 		}
 		.land_back_two_body{
 			width: 100%;
@@ -112,7 +112,8 @@
 		</div>
 	</div>
 	<script type="text/javascript">
-		let URLS = 'http://10.1.8.36:8080/calculatesalary';
+		//let URLS = 'http://10.1.8.36:8080/calculatesalary';
+		let URLS = 'http://10.1.8.162:8080/calculatesalary';
 		c('land_back_two_btn')[0].onclick = function(){
 			let landBackTwoUser = c('land_back_two_user')[0].value;
 			let landBackTwoPass = c('land_back_two_pass')[0].value;
@@ -160,12 +161,13 @@
 				cxt.arc(x,y,radius,0,2*Math.PI);
 				cxt.fillStyle = color;
 				let vx,vy;
+				let MathDom = Math.random();
 				if(Math.random() < 0.5){
-					vx = x+parseInt(Math.random()*30);
-					vy = y+parseInt(Math.random()*30);
+					vx = x+parseInt(MathDom*30);
+					vy = y+parseInt(MathDom*30);
 				}else{
-					vx = x-parseInt(Math.random()*30);
-					vy = y-parseInt(Math.random()*30);
+					vx = x-parseInt(MathDom*30);
+					vy = y-parseInt(MathDom*30);
 				}
 				cxt.fill();
 				let recordObject = {};
@@ -175,6 +177,8 @@
 				recordObject.color = color;
 				recordObject.vx = vx;
 				recordObject.vy = vy;
+				let recordObjectNum = parseInt(MathDom*10)/10;
+				recordObjectNum === 0 ? recordObject.num = 1 : recordObject.num = recordObjectNum;
 				record.push(recordObject);
 			}
 		}
@@ -191,20 +195,20 @@
 			start(context,ox,oy,20);
 			context.clearRect(0,0,Width,Height);
 			for(let i = 0; i < record.length; i++){
-				if(record[i].x < record[i].vx){
-					record[i].x = record[i].x + 1;
+				if(record[i].x < record[i].vx && record[i].vx - record[i].x > record[i].num){
+					record[i].x = record[i].x + record[i].num;
 					if(record[i].y > record[i].vy){
-						record[i].y = record[i].y - 1;
+						record[i].y = record[i].y - record[i].num;
 					}else{
-						record[i].y = record[i].y + 1;
+						record[i].y = record[i].y + record[i].num;
 					}
 					showStart(context,record[i].x,record[i].y,record[i].radius,record[i].color);
-				}else if(record[i].x > record[i].vx){
-					record[i].x = record[i].x - 1;
+				}else if(record[i].x > record[i].vx && record[i].x - record[i].vx > record[i].num){
+					record[i].x = record[i].x - record[i].num;
 					if(record[i].y > record[i].vy){
-						record[i].y = record[i].y - 1;
+						record[i].y = record[i].y - record[i].num;
 					}else{
-						record[i].y = record[i].y + 1;
+						record[i].y = record[i].y + record[i].num;
 					}
 					showStart(context,record[i].x,record[i].y,record[i].radius,record[i].color);
 				}else{
@@ -215,20 +219,20 @@
 			TiMore = setInterval(function(){
 				context.clearRect(0,0,Width,Height);
 				for(let i = 0; i < record.length; i++){
-					if(record[i].x < record[i].vx){
-						record[i].x = record[i].x + 1;
+					if(record[i].x < record[i].vx && record[i].vx - record[i].x > record[i].num){
+						record[i].x = record[i].x + record[i].num;
 						if(record[i].y > record[i].vy){
-							record[i].y = record[i].y - 1;
+							record[i].y = record[i].y - record[i].num;
 						}else{
-							record[i].y = record[i].y + 1;
+							record[i].y = record[i].y + record[i].num;
 						}
 						showStart(context,record[i].x,record[i].y,record[i].radius,record[i].color);
-					}else if(record[i].x > record[i].vx){
-						record[i].x = record[i].x - 1;
+					}else if(record[i].x > record[i].vx && record[i].x - record[i].vx > record[i].num){
+						record[i].x = record[i].x - record[i].num;
 						if(record[i].y > record[i].vy){
-							record[i].y = record[i].y - 1;
+							record[i].y = record[i].y - record[i].num;
 						}else{
-							record[i].y = record[i].y + 1;
+							record[i].y = record[i].y + record[i].num;
 						}
 						showStart(context,record[i].x,record[i].y,record[i].radius,record[i].color);
 					}else{
@@ -239,7 +243,7 @@
 					}
 				}
 			},20)
-		}
+		};
 
 		window.onresize = function(){
 			canvas.width = Width = bear.clientWidth;

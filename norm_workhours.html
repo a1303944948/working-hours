@@ -32,13 +32,37 @@
                     <th>工段</th>
                     <th>准备工时（分）</th>
                     <th>标准工时（秒）</th>
-                    <th>工作中心编号</th>
-                    <th>工作中心名称</th>
+                    <th>工作中心</th>
+                    <th>操作</th>
                 </tr>
             </thead>
             <tbody class="norm_foot_tbody"></tbody>
         </table>
-        <button class="norm_foot_edit">修改</button>
+        <div id="page_mark" class="wm_pagemark" style="margin-top: 8px;" data-length="[0,1,20]" data-pagetype='1' data-pagemark=""></div>
+        <button class="norm_foot_unTime">未录工时</button>
+        <button class="norm_foot_plug">插入</button>
+        <button class="norm_foot_add">添加</button>
+    </div>
+    <div class="norm_foot_unTime_fixed">
+        <div class="norm_foot_unTime_body">
+            <p>title<span style='cursor: pointer' onclick="this.parentNode.parentNode.parentNode.style.display = 'none';">×</span></p>
+            <div class="norm_foot_unTime_body_head">
+            <table class="norm_foot_unTime_body_table">
+                <thead class="norm_foot_unTime_body_head_thead">
+                    <tr>
+                        <th>工单编号</th>
+                        <th>物料编号</th>
+                        <th>物料名称</th>
+                        <th>工序描述</th>
+                        <th>工作顺序</th>
+                        <th>工作中心</th>
+                    </tr>
+                </thead>
+                <tbody class="norm_foot_unTime_body_head_tbody"></tbody>
+            </table>
+            </div>
+            <div id="page_mark_two" class="wm_pagemark" style="margin-top: 5px;" data-length="[0,1,20]" data-pagetype='2' data-pagemark=""></div>
+        </div>
     </div>
     <script src="js/norm_workhours.js"></script>
 </div>

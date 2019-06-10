@@ -8,7 +8,7 @@ document.writeln("	<div class=\'header_right\'>");
 document.writeln("		<div class=\'header_right_index\'>"+ JSON.parse(sessionStorage.loginUserName).userName +"</div>");
 document.writeln("		<div class=\'header_right_black\'>");
 document.writeln("			<div class=\'header_right_black_list header_right_black_edit\' data-value=\'4\'>修改密码</div>");
-document.writeln("			<div class=\'header_right_black_list header_right_black_exit\' data-value=\'4\'>退出登录</div>");
+document.writeln("			<div class=\'header_right_black_list header_right_black_exit\' data-value=\'4\'>安全退出</div>");
 document.writeln("		</div>");
 document.writeln("	</div>");
 document.writeln("</header>");
@@ -49,7 +49,8 @@ c('header_right_black_exit')[0].onclick = function(){
 	window.location.href = "land.html";
 };
 
-let URLS = 'http://10.1.8.36:8080/calculatesalary';
+//let URLS = 'http://10.1.8.36:8080/calculatesalary';
+let URLS = 'http://10.1.8.162:8080/calculatesalary';
 
 function headStart(){
 	let headerCenter = c('header_center')[0];

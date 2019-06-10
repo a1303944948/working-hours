@@ -22,7 +22,7 @@ d('norm_search_btn').onclick = function(){
     },'','json');
 };
 function reaSh(){
-    ajax('post',URLS + '/jf/zdbg/reportingwork/signingreportdata.json','workcode=' + normSearch.value + '&workcenterCode=' + JSON.parse(sessionStorage.loginUserName).workcenterCode,function(data){
+    ajax('post',URLS + '/jf/zdbg/reportingwork/reportdata.json','workcode=' + normSearch.value + '&sign=' + normSign.dataset.value,function(data){
         normOne = data.objs;
         let normFootTbody = c('norm_foot_tbody')[0];
         normFootTbody.innerHTML = '';
@@ -64,7 +64,7 @@ function normFootTbodyAppend(obj,num){
         if(num === '1'){
             tdm.innerHTML = '<button onclick="reviewTwo(this)">删除</button>';
         }else{
-            tdm.innerHTML = '<button onclick="reviewOne(this)">审核</button>';
+            tdm.innerHTML = '<button style="margin-right: 5px;" onclick="reviewOne(this)">审核</button><button onclick="reviewTwo(this)">删除</button>';
         }
         setAppend(tr,[tda,tdb,tdc,tdd,tde,tdf,tdg,tdh,tdi,tdj,tdk,tdl,tdm]);
         normFootTbody.appendChild(tr);

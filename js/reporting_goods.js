@@ -121,11 +121,14 @@ function normFootTbodyAppend(obj){
                     operatorFixedBodyView.innerHTML = '<h4>已选择作业员：</h4>';
                     let operatorListViewArray = JSON.parse(Operator.dataset.select);
                     for(let j in operatorListViewArray){
+                        if(!operatorListViewArray.hasOwnProperty(j)) continue;
                         for(let k in operatorListViewArray[j]){
+                            if(!operatorListViewArray[j].hasOwnProperty(k)) continue;
                             let p = creat('p');
                             p.innerHTML = k;
                             operatorFixedBody.appendChild(p);
                             for(let o in operatorListViewArray[j][k]){
+                                if(!operatorListViewArray[j][k].hasOwnProperty(o)) continue;
                                 let h5 = creat('h5');
                                 h5.innerHTML = '<input type="checkbox" data-value="'+ operatorListViewArray[j][k][o].operatorCode +'" data-name="'+ operatorListViewArray[j][k][o].operatorName +'" onclick="FixedCheck(this)"  />' + operatorListViewArray[j][k][o].operatorName;
                                 operatorFixedBody.appendChild(h5);
@@ -159,12 +162,11 @@ function normFootTbodyAppend(obj){
 
 //选择作业员使用方法
 function FixedCheck(that){
-    let reportingFootReadyTotal = d('reporting_foot_ready_total').innerHTML;
-    let reportingFootNormTotal = d('reporting_foot_norm_total').innerHTML;
-    let perCaPita = d('per_caPita');
-
-    let operatorFixedBodyView = c('operator_fixed_body_view')[0];
-    let Operator = d('operator');
+    let reportingFootReadyTotal = d('reporting_foot_ready_total').innerHTML,
+    reportingFootNormTotal = d('reporting_foot_norm_total').innerHTML,
+    perCaPita = d('per_caPita'),
+    operatorFixedBodyView = c('operator_fixed_body_view')[0],
+    Operator = d('operator');
     if(that.checked){
         let p = creat('p');
         p.innerHTML = that.dataset.name;
@@ -212,17 +214,17 @@ function FixedCheck(that){
 
 //提交
 d('norm_foot_btn').onclick = function(){
-    let onrmArr = JSON.parse(c('norm_foot_tbody')[0].children[0].dataset.value);    //获取报工的基础信息
-    let onrmArrS = {};    //获取报工的基础信息
-    let operatorStr = '';   //获取作业员
-    let sectionDataValue = d('section').dataset.value;  //获取工段序号
-    let sectionValue = d('section').value;  //获取工段名称
-    let normFootConfirmValue = d('norm_foot_confirm').value;    //获取报工数量
-    let reportingFootReady = d('reporting_foot_ready').innerHTML;    //获取准备工时
-    let reportingFootReadyTotal = d('reporting_foot_ready_total').innerHTML;  //获取准备工时合计
-    let reportingFootNorm = d('reporting_foot_norm').innerHTML;   //获取标准工时
-    let reportingFootNormTotal = d('reporting_foot_norm_total').innerHTML;    //获取标准工时合计
-    let perCaPita = d('per_caPita').innerHTML;    //获取人均工时
+    let onrmArr = JSON.parse(c('norm_foot_tbody')[0].children[0].dataset.value),    //获取报工的基础信息
+    onrmArrS = {},    //获取报工的基础信息
+    operatorStr = '',   //获取作业员
+    sectionDataValue = d('section').dataset.value,  //获取工段序号
+    sectionValue = d('section').value,  //获取工段名称
+    normFootConfirmValue = d('norm_foot_confirm').value,    //获取报工数量
+    reportingFootReady = d('reporting_foot_ready').innerHTML,    //获取准备工时
+    reportingFootReadyTotal = d('reporting_foot_ready_total').innerHTML,  //获取准备工时合计
+    reportingFootNorm = d('reporting_foot_norm').innerHTML,   //获取标准工时
+    reportingFootNormTotal = d('reporting_foot_norm_total').innerHTML,    //获取标准工时合计
+    perCaPita = d('per_caPita').innerHTML;    //获取人均工时
     for(let i = 0; i < c('operator_fixed_body_view_p').length; i++){
         if(i !== 0){
             operatorStr += ',' + c('operator_fixed_body_view_p')[i].dataset.value;
