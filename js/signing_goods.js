@@ -19,7 +19,9 @@ d('norm_search_btn').onclick = function(){
 function reaSh(){
     ajax('post',URLS + '/jf/zdbg/reportingwork/signingreportdata.json','workcode=' + normSearch.value + '&workcenterCode=' + JSON.parse(sessionStorage.loginUserName).workcenterCode,function(data){
         normOne = data.objs;
-        normFootTbodyAppend(normOne);
+        if(normOne === undefined||normOne.length <= 0){
+            normFootTbodyAppend(normOne);
+        }
     },'','json');
 }
 
@@ -39,7 +41,6 @@ function normFootTbodyAppend(obj){
         let tdd = creat('td');
         let tde = creat('td');
         let tdf = creat('td');
-        let tdg = creat('td');
         let tdh = creat('td');
         let tdi = creat('td');
         let tdj = creat('td');
@@ -52,14 +53,13 @@ function normFootTbodyAppend(obj){
         tdd.innerHTML = obj[i].processDescription;
         tde.innerHTML = obj[i].receivingWorkcenter;
         tdf.innerHTML = obj[i].transferNum;
-        tdg.innerHTML = obj[i].workSection;
         tdh.innerHTML = obj[i].preparationTime;
-        tdi.innerHTML = obj[i].standardWorkhours;
+        tdi.innerHTML = obj[i].artificialTime;
         tdj.innerHTML = obj[i].preparationTimeTotal;
-        tdk.innerHTML = obj[i].standardWorkhoursTotal;
+        tdk.innerHTML = obj[i].artificialTimeTotal;
         tdl.innerHTML = '<textarea readonly="readonly">'+obj[i].operatorCode+'</textarea>';
         tdm.innerHTML = '<button onclick="reviewOne(this)">签收</button>';
-        setAppend(tr,[tda,tdb,tdc,tdd,tde,tdf,tdg,tdh,tdi,tdj,tdk,tdl,tdm]);
+        setAppend(tr,[tda,tdb,tdc,tdd,tde,tdf,tdh,tdi,tdj,tdk,tdl,tdm]);
         normFootTbody.appendChild(tr);
     }
 }
@@ -68,8 +68,8 @@ function reviewOne(that){
     let reviewArr = JSON.parse(that.parentNode.parentNode.dataset.value);
     reviewArr.signingUserCode = JSON.parse(sessionStorage.loginUserName).userCode;
     ajax('post',URLS + '/jf/zdbg/reportingwork/signing.json','obj=' + JSON.stringify(reviewArr),function(data){
-        log(data);
+        alert(JSON.stringify(data));
         alern(data.msg);
-        reaSh   ();
+        reaSh();
     },'','json');
 }

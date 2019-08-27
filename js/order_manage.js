@@ -11,7 +11,7 @@ c('order_fileBtn')[0].onclick = function(){
     }
     $.ajax({
         type:"post",
-        url: URLS + '/jf/zdbg/workorder/upload.json',
+        url: URLS + '/jf/zdbg/workordertime/import.json',
         contentType: false, //这个一定要写
         processData: false, //这个也一定要写，不然会报错
         data:formData,
@@ -47,7 +47,7 @@ c('order_upBtn')[0].onclick = function(){
     }
     $.ajax({
         type:"post",
-        url: URLS + '/jf/zdbg/workorder/update.json',
+        url: URLS + '/jf/zdbg/workordertime/update.json',
         contentType: false, //这个一定要写
         processData: false, //这个也一定要写，不然会报错
         data:formData,
@@ -72,7 +72,7 @@ c('order_upBtn')[0].onclick = function(){
 
 //导出事件
 c('order_exportBtn')[0].onclick = function(){
-    location.href = URLS + '/jf/zdbg/workorder/export.json';
+    location.href = URLS + '/jf/zdbg/workordertime/export.json';
 };
 
 //搜索事件
@@ -97,7 +97,7 @@ function WmPageMarkStart(num){
     let pageMark = d('page_mark');
     let pageMarkLength = JSON.parse(d('page_mark').dataset.length);
     //http://10.1.8.36:8080/calculatesalary
-    ajax('post',URLS + '/jf/zdbg/workorder/list.json','workorderCode=' + orderWork + '&materialsCode=' + orderNumber + '&workcenterCode=' + orderCenter + '&scheduleDate=' + orderDate + '&urgentNum=' + orderUrgent + '&deleted=' + orderDelete + '&pageNumber=' + num + '&pageSize=' + pageMarkLength[2],function(data){
+    ajax('post',URLS + '/jf/zdbg/workordertime/list.json','workorderCode=' + orderWork + '&materialsCode=' + orderNumber + '&workcenterCode=' + orderCenter + '&scheduleDate=' + orderDate + '&urgentNum=' + orderUrgent + '&deleted=' + orderDelete + '&pageNumber=' + num + '&pageSize=' + pageMarkLength[2],function(data){
         log(data);
         pageMarkLength[0] = data.total;
         pageMark.setAttribute('data-length',JSON.stringify(pageMarkLength));
@@ -151,6 +151,9 @@ function normFootTbodyAppend(obj,num){
             let tdr = creat('td');
             let tds = creat('td');
             let tdt = creat('td');
+            let tdu = creat('td');
+            let tdv = creat('td');
+            let tdw = creat('td');
             tda.innerHTML = obj[i].workorderCode;
             tdb.innerHTML = obj[i].materialsCode;
             //tdc.innerHTML = obj[i].materialsName;
@@ -165,17 +168,20 @@ function normFootTbodyAppend(obj,num){
             tdl.innerHTML = obj[i].releaseDate;
             tdm.innerHTML = obj[i].workcenterCode;
             tdn.innerHTML = obj[i].receivingWorkcenter;
-            tdo.innerHTML = '<input class="order_foot_tbody_date" type="date" value="'+obj[i].scheduleDate+'"/>';
-            tdp.innerHTML = '<input class="order_foot_tbody_number" type="number" value="'+obj[i].targetNum+'"/>';
-            tdq.innerHTML = obj[i].urgentNum === 1?'<input class="order_foot_tbody_checkbox" type="checkbox" checked="checked"/>':'<input class="order_foot_tbody_checkbox" type="checkbox"/>';
-            tdr.innerHTML = obj[i].updatetime;
-            tds.innerHTML = obj[i].workOrderStatus;
+            tdo.innerHTML = obj[i].preparationTime;
+            tdp.innerHTML = obj[i].artificialTime;
+            tdq.innerHTML = obj[i].machineTime;
+            tdr.innerHTML = '<input class="order_foot_tbody_date" type="date" value="'+obj[i].scheduleDate+'"/>';
+            tds.innerHTML = '<input class="order_foot_tbody_number" type="number" value="'+obj[i].targetNum+'"/>';
+            tdt.innerHTML = obj[i].urgentNum === 1?'<input class="order_foot_tbody_checkbox" type="checkbox" checked="checked"/>':'<input class="order_foot_tbody_checkbox" type="checkbox"/>';
+            tdu.innerHTML = obj[i].updatetime;
+            tdv.innerHTML = obj[i].workOrderStatus;
             if(num === '1'){
-                tdt.innerHTML = '<button onclick="edit(this,'+i+',0)">恢复</button>';
+                tdw.innerHTML = '<button onclick="edit(this,'+i+',0)">恢复</button>';
             }else{
-                tdt.innerHTML = '<button onclick="edit(this,'+i+',0)">修改</button> <button onclick="edit(this,'+i+',1)">删除</button>';
+                tdw.innerHTML = '<button onclick="edit(this,'+i+',0)">修改</button> <button onclick="edit(this,'+i+',1)">删除</button>';
             }
-            setAppend(tr,[tda,tdb,/*tdc,*/tdd,tde,tdf,tdg,tdh,tdi,/*tdj,tdk,*/tdl,tdm,tdn,tdo,tdp,tdq,tdr,tds,tdt]);
+            setAppend(tr,[tda,tdb,/*tdc,*/tdd,tde,tdf,tdg,tdh,tdi,/*tdj,tdk,*/tdl,tdm,tdn,tdo,tdp,tdq,tdr,tds,tdt,tdu,tdv,tdw]);
             orderFootTbody.appendChild(tr);
         }
     }else{
@@ -200,9 +206,9 @@ function edit(that,index,num){
     let objectify = encodeURIComponent(JSON.stringify(obj));
     let orderDelete = d('order_delete').dataset.value;
     log(objectify);
-    ajax('post',URLS + '/jf/zdbg/workorder/updatesigle.json','obj=' + objectify,function(data){
+    ajax('post',URLS + '/jf/zdbg/workordertime/updatesigle.json','obj=' + objectify,function(data){
         log(data);
-        ajax('post',URLS + '/jf/zdbg/workorder/list.json','workorderCode=&materialsCode=&workcenterCode=&scheduleDate=&urgentNum=&deleted=',function(data){
+        ajax('post',URLS + '/jf/zdbg/workordertime/list.json','workorderCode=&materialsCode=&workcenterCode=&scheduleDate=&urgentNum=&deleted=',function(data){
             normFootTbodyAppend(data.objs, orderDelete);
         },'','json');
         alern(data.text);

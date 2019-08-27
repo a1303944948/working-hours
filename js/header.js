@@ -49,8 +49,8 @@ c('header_right_black_exit')[0].onclick = function(){
 	window.location.href = "land.html";
 };
 
-//let URLS = 'http://10.1.8.36:8080/calculatesalary';
-let URLS = 'http://10.1.8.162:8080/calculatesalary';
+let URLS = 'http://10.1.8.36:8080/calculatesalary';
+//let URLS = 'http://10.1.8.162:8080/calculatesalary';
 
 function headStart(){
 	let headerCenter = c('header_center')[0];

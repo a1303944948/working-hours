@@ -18,6 +18,7 @@ d('norm_search_btn').onclick = function(){
             alern('没有数据!');
             return false;
         }
+        log(normOne);
         normFootTbodyAppend(normOne,normSign.dataset.value);
     },'','json');
 };
@@ -26,6 +27,9 @@ function reaSh(){
         normOne = data.objs;
         let normFootTbody = c('norm_foot_tbody')[0];
         normFootTbody.innerHTML = '';
+        if(normOne === undefined||normOne.length <= 0){
+            return false;
+        }
         normFootTbodyAppend(normOne,normSign.dataset.value);
     },'','json');
 }
@@ -42,7 +46,6 @@ function normFootTbodyAppend(obj,num){
         let tdd = creat('td');
         let tde = creat('td');
         let tdf = creat('td');
-        let tdg = creat('td');
         let tdh = creat('td');
         let tdi = creat('td');
         let tdj = creat('td');
@@ -55,18 +58,17 @@ function normFootTbodyAppend(obj,num){
         tdd.innerHTML = obj[i].processDescription;
         tde.innerHTML = obj[i].receivingWorkcenter;
         tdf.innerHTML = obj[i].transferNum;
-        tdg.innerHTML = obj[i].workSection;
         tdh.innerHTML = obj[i].preparationTime;
-        tdi.innerHTML = obj[i].standardWorkhours;
+        tdi.innerHTML = obj[i].artificialTime;
         tdj.innerHTML = obj[i].preparationTimeTotal;
-        tdk.innerHTML = obj[i].standardWorkhoursTotal;
+        tdk.innerHTML = obj[i].artificialTimeTotal;
         tdl.innerHTML = '<textarea readonly="readonly">'+obj[i].operatorCode+'</textarea>';
         if(num === '1'){
             tdm.innerHTML = '<button onclick="reviewTwo(this)">删除</button>';
         }else{
             tdm.innerHTML = '<button style="margin-right: 5px;" onclick="reviewOne(this)">审核</button><button onclick="reviewTwo(this)">删除</button>';
         }
-        setAppend(tr,[tda,tdb,tdc,tdd,tde,tdf,tdg,tdh,tdi,tdj,tdk,tdl,tdm]);
+        setAppend(tr,[tda,tdb,tdc,tdd,tde,tdf,tdh,tdi,tdj,tdk,tdl,tdm]);
         normFootTbody.appendChild(tr);
     }
 }
