@@ -229,5 +229,6 @@ d('norm_foot_btn').onclick = function(){
     log(JSON.stringify(onrmArrS));
     ajax('post', URLS + '/jf/zdbg/reportingwork/submit.json', 'obj=' + JSON.stringify(onrmArrS),function(data){
         alern(data.msg);
+        window.location.reload();
     },'','json');
 };

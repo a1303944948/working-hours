@@ -6,7 +6,7 @@ d('norm_search_btn').onclick = function(){
         alern('请输入工单编号查询！');
         return false;
     }
-    ajax('post',URLS + '/jf/zdbg/reportingwork/signingreportdata.json','workcode=' + normSearch.value + '&workcenterCode=' + JSON.parse(sessionStorage.loginUserName).workcenterCode,function(data){
+    ajax('post',URLS + '/jf/zdbg/reportingwork/signingreportdata.json','workcode=' + normSearch.value + '&workcenterCode=' + JSON.parse(sessionStorage.loginUserName).workcenterCode + '&userCode=' + JSON.parse(sessionStorage.loginUserName).userCode,function(data){
         normOne = data.objs;
         log(normOne);
         if(normOne === undefined||normOne.length <= 0){
