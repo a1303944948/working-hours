@@ -58,7 +58,7 @@ function headStart(){
 		for(let i = 0; i < data.length; i++){
 			let div = creat('div');
 			setStyle(div,{width: '100px',height: '50px',lineHeight: '50px',textAlign: 'center',float: 'left',paddingLeft: '10px',paddingRight: '10px',color: '#f0f0f0',cursor: 'pointer',position: 'relative',userSelect: 'none'});
-			div.innerHTML = '<img width="20px" height="20px" style="position: relative; top: 5px; margin-right: 10px;" src="image/nav/nav_001.png"/>' + data[i][0].text;
+			div.innerHTML = '<img width="20px" height="20px" style="position: relative; top: 5px; margin-right: 10px;" src="'+data[i][0].icon+'"/>' + data[i][0].text;
 			div.setAttribute('data-menuid',data[i][0].menuid);
 			div.setAttribute('data-src',data[i][0].src);
 			if(data[i][1].length !== 0){
@@ -72,7 +72,7 @@ function headStart(){
 				ul.setAttribute('data-menuid',data[i][0].menuid);
 				for(let j = 0; j < data[i][1].length; j++){
 					let li = creat('li');
-					li.innerHTML = '<img width="20px" height="20px" style="position: relative; top: 5px; margin-right: 10px;" src="image/nav/nav_001.png"/>' + data[i][1][j].text;
+					li.innerHTML = '<img width="20px" height="20px" style="position: relative; top: 5px; margin-right: 10px;" src="'+data[i][1][j].icon+'"/>' + data[i][1][j].text;
 					li.setAttribute('data-menuid',data[i][1][j].menuid);
 					li.setAttribute('data-perent',data[i][1][j].perent);
 					li.setAttribute('data-src',data[i][1][j].src);

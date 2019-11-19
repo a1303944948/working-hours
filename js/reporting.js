@@ -57,16 +57,17 @@ function normFootTbodyAppend(obj){
             let tdd = creat('td');
             let tde = creat('td');
             let tdf = creat('td');
-            let tdg = creat('td');
-            let tdh = creat('td');
+            //let tdg = creat('td');
+            //let tdh = creat('td');
             let tdi = creat('td');
-            // let tdj = creat('td');
+            let tdj = creat('td');
             // let tdk = creat('td');
             let tdl = creat('td');
             let tdm = creat('td');
             let tdn = creat('td');
             let tdo = creat('td');
             let tdp = creat('td');
+            let tdq = creat('td');
             // let tdq = creat('td');
             // let tdr = creat('td');
             // let tds = creat('td');
@@ -77,10 +78,10 @@ function normFootTbodyAppend(obj){
             tdd.innerHTML = obj[i].workingOrder;
             tde.innerHTML = obj[i].processDescription;
             tdf.innerHTML = obj[i].transferNum;
-            tdg.innerHTML = obj[i].workingSectionSequence;
-            tdh.innerHTML = obj[i].workSection;
+            //tdg.innerHTML = obj[i].workingSectionSequence;
+            //tdh.innerHTML = obj[i].workSection;
             tdi.innerHTML = obj[i].percapitaWorkhours;
-            //tdj.innerHTML = obj[i].basicStartDate;
+            tdj.innerHTML = obj[i].artificialTimeTotal;
            // tdk.innerHTML = obj[i].basicEndDate;
             tdl.innerHTML = '<div>' + obj[i].operatorCode + '</div>';
             tdm.innerHTML = obj[i].reportTime;
@@ -95,6 +96,11 @@ function normFootTbodyAppend(obj){
                 tdo.innerHTML = ''
             }
             tdp.innerHTML = obj[i].status;
+            if(obj[i].signingUserCode !== undefined){
+                tdq.innerHTML = obj[i].signingUserCode;
+            }else{
+                tdq.innerHTML = ''
+            }
             // tdq.innerHTML = obj[i].urgentNum === 1?'<input class="order_foot_tbody_checkbox" type="checkbox" checked="checked"/>':'<input class="order_foot_tbody_checkbox" type="checkbox"/>';
             // tdr.innerHTML = obj[i].updatetime;
             // tds.innerHTML = obj[i].workOrderStatus;
@@ -103,7 +109,7 @@ function normFootTbodyAppend(obj){
             // }else{
             //     tdt.innerHTML = '<button onclick="edit(this,'+i+',0)">修改</button> <button onclick="edit(this,'+i+',1)">删除</button>';
             // }
-            setAppend(tr,[tda,tdb,/*tdc,*/tdd,tde,tdf,tdg,tdh,tdi,/*tdj,tdk,*/tdl,tdm,tdn,tdo,tdp,/*tdq,tdr,tds,tdt*/]);
+            setAppend(tr,[tda,tdb,/*tdc,*/tdd,tde,tdf,/*tdg,tdh,*/tdi,tdj,/*tdk,*/tdl,tdm,tdn,tdo,tdp,tdq,/*tdr,tds,tdt*/]);
             orderFootTbody.appendChild(tr);
         }
     }else{
