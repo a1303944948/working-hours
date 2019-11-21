@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="utf-8"/>
+    <title>耗外报工</title>
+    <link rel="icon" type="image/x-icon" href="image/logo.jpg"/>
+    <link rel="stylesheet" type="text/css" href="css/global.css"/>
+    <link rel="stylesheet" type="text/css" href="css/expenditure.css"/>
+    <script type="text/javascript" src="js/wm.js"></script>
+</head>
+<body>
+    <script type="text/javascript" src="js/header.js"></script>
+    <div class="home">
+        <div class="norm_foot">
+            <div class="norm_foot_one">
+                <p>第一步</p>
+                <table class="norm_foot_table">
+                    <thead class="norm_foot_thead">
+                    <tr>
+                        <th>工单编号</th>
+                        <th>物料编号</th>
+                        <th>工作顺序</th>
+                        <th>工序描述</th>
+                        <th>收货工作中心</th>
+                        <th>报工数量</th>
+                        <th>操作</th>
+                    </tr>
+                    </thead>
+                    <tbody class="norm_foot_tbody">
+                        <tr>
+                            <td id="norm_foot_order">9999999999</td>
+                            <td id="norm_foot_materials">unplanned</td>
+                            <td id="norm_foot_workOrder">0010</td>
+                            <td><textarea id="norm_foot_marke" placeholder="请输入工序描述..."></textarea></td>
+                            <td id="norm_foot_work"></td>
+                            <td id="norm_foot_number">1</td>
+                            <td><button class="norm_foot_next">下一步</button></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="norm_foot_two">
+                <p>第二步</p>
+                <table class="reporting_foot_table">
+                    <thead class="reporting_foot_thead">
+                    <tr>
+                        <th>准备工时（分）</th>
+                        <th>人工工时（秒）</th>
+                        <th>准备工时合计（分）</th>
+                        <th>人工工时合计（秒）</th>
+                        <th>人均工时（秒）</th>
+                        <th>作业员</th>
+                    </tr>
+                    </thead>
+                    <tbody class="reporting_foot_tbody">
+                        <tr>
+                            <td id="reporting_foot_ready"></td>
+                            <td id="reporting_foot_norm"></td>
+                            <td id="reporting_foot_ready_total"></td>
+                            <td><input id="reporting_foot_norm_total" type="number" placeholder="请输入工时..."/></td>
+                            <td id="per_caPita">0</td>
+                            <td style="position: relative;"><textarea id="operator" readonly="readonly" placeholder="请选择作业员..."></textarea></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <button id="norm_foot_btn">提交</button>
+        </div>
+    </div>
+    <div class="operator_fixed">
+        <div class="operator_fixed_body"></div>
+        <div class="operator_fixed_body_view"></div>
+    </div>
+    <script src="js/expenditure.js"></script>
+</body>
+</html>

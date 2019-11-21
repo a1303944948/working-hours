@@ -57,7 +57,7 @@ function normFootTbodyAppend(obj){
             let tdd = creat('td');
             let tde = creat('td');
             let tdf = creat('td');
-            //let tdg = creat('td');
+            let tdg = creat('td');
             //let tdh = creat('td');
             let tdi = creat('td');
             let tdj = creat('td');
@@ -78,7 +78,7 @@ function normFootTbodyAppend(obj){
             tdd.innerHTML = obj[i].workingOrder;
             tde.innerHTML = obj[i].processDescription;
             tdf.innerHTML = obj[i].transferNum;
-            //tdg.innerHTML = obj[i].workingSectionSequence;
+            tdg.innerHTML = obj[i].preparationTime;
             //tdh.innerHTML = obj[i].workSection;
             tdi.innerHTML = obj[i].percapitaWorkhours;
             tdj.innerHTML = obj[i].artificialTimeTotal;
@@ -109,7 +109,7 @@ function normFootTbodyAppend(obj){
             // }else{
             //     tdt.innerHTML = '<button onclick="edit(this,'+i+',0)">修改</button> <button onclick="edit(this,'+i+',1)">删除</button>';
             // }
-            setAppend(tr,[tda,tdb,/*tdc,*/tdd,tde,tdf,/*tdg,tdh,*/tdi,tdj,/*tdk,*/tdl,tdm,tdn,tdo,tdp,tdq,/*tdr,tds,tdt*/]);
+            setAppend(tr,[tda,tdb,/*tdc,*/tdd,tde,tdf,tdg,/*tdh,*/tdi,tdj,/*tdk,*/tdl,tdm,tdn,tdo,tdp,tdq,/*tdr,tds,tdt*/]);
             orderFootTbody.appendChild(tr);
         }
     }else{

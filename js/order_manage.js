@@ -9,6 +9,7 @@ c('order_fileBtn')[0].onclick = function(){
     for(let i = 0;i < orderBodyFile.files.length; i++){
         formData.append("file", orderBodyFile.files[i]);
     }
+    loading();
     $.ajax({
         type:"post",
         url: URLS + '/jf/zdbg/workordertime/import.json',
@@ -16,8 +17,8 @@ c('order_fileBtn')[0].onclick = function(){
         processData: false, //这个也一定要写，不然会报错
         data:formData,
         success:function(data){
-            log(data);
-            alert('上传成功！');
+            loadingClear();
+            alern('导入成功！');
             let repeat = '';
             for(let i = 0;i < data.existOrder.length; i++){
                 repeat += '工单编号：'+data.existOrder[i].workorderCode + '  工序：' + data.existOrder[i].workingOrder + '<br/>';
@@ -29,7 +30,8 @@ c('order_fileBtn')[0].onclick = function(){
             normFootTbodyAppend(data.objs,0);
         },
         error:function(XMLHttpRequest, textStatus, errorThrown, data){
-            log(errorThrown);
+            loadingClear();
+            alern('导入失败');
         }
     });
 };
@@ -45,6 +47,7 @@ c('order_upBtn')[0].onclick = function(){
     for(let i = 0;i < orderBodyFile.files.length; i++){
         formData.append("file", orderBodyFile.files[i]);
     }
+    loading();
     $.ajax({
         type:"post",
         url: URLS + '/jf/zdbg/workordertime/update.json',
@@ -52,8 +55,8 @@ c('order_upBtn')[0].onclick = function(){
         processData: false, //这个也一定要写，不然会报错
         data:formData,
         success:function(data){
-            log(data);
-            alert('更新成功！');
+            loadingClear();
+            alern('更新成功！');
             let repeat = '';
             for(let i = 0;i < data.haveNtOrder.length; i++){
                 repeat += '工单编号：'+data.haveNtOrder[i].workorderCode + '  工序：' + data.haveNtOrder[i].workingOrder + '<br/>';
@@ -65,7 +68,8 @@ c('order_upBtn')[0].onclick = function(){
             normFootTbodyAppend(data.objs,0);
         },
         error:function(XMLHttpRequest, textStatus, errorThrown, data){
-            log(errorThrown);
+            loadingClear();
+            alern('更新失败');
         }
     });
 };

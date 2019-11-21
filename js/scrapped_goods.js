@@ -4,12 +4,8 @@ let normOne;
 d('norm_search').onchange = function(){
     ajax('post',URLS + '/jf/zdbg/reportingwork/workingorder.json','workcode=' + normSearch.value,function(data){
         normOne = data.objs;
-        log(normOne);
-        ajax('post',URLS + '/jf/zdbg/reportingwork/worksection.json','materialsCode='+ normOne[0].materialsCode +'&workingOrder=' + normOne[0].workingOrder,function(msg){
+        /*ajax('post',URLS + '/jf/zdbg/reportingwork/worksection.json','materialsCode='+ normOne[0].materialsCode +'&workingOrder=' + normOne[0].workingOrder,function(msg){
             log(msg);
-            let Section = d('section');
-            Section.dataset.value = '';
-            Section.value = '';
             let SectionArr = [];
             for(let j = 0; j < msg.objs.length; j++){
                 let SectionObj = {};
@@ -19,7 +15,7 @@ d('norm_search').onchange = function(){
             }
             Section.dataset.select = JSON.stringify(SectionArr);
             WmStartSelect();
-        },'','json');
+        },'','json');*/
     },'','json');
 };
 d('norm_search_btn').onclick = function(){
@@ -29,7 +25,8 @@ d('norm_search_btn').onclick = function(){
 function normFootTbodyAppend(obj){
     let normFootTbody = c('norm_foot_tbody')[0];
     normFootTbody.innerHTML = '';
-    if(obj === undefined||obj.length <= 0){
+    log(obj);
+    if(!obj){
         alern('没有数据!');
         return false;
     }
@@ -57,8 +54,8 @@ function normFootTbodyAppend(obj){
     }
 
     c('norm_foot_next')[0].onclick = function(){
-        if(d('section').dataset.value === ""||d('section').dataset.value === undefined){
-            alern('请选择工段后进行报废操作！');
+        if(!confirm('确定要报废吗？')){
+            return false;
         }
         let scrappedObj = {};
         scrappedObj.workorderCode = normOne[0].workorderCode;
@@ -69,10 +66,11 @@ function normFootTbodyAppend(obj){
         scrappedObj.processDescription = normOne[0].processDescription;
         scrappedObj.scrappedQuantity = d('norm_foot_confirm').value;
         scrappedObj.scrappedUserCode = JSON.parse(sessionStorage.loginUserName).userCode;
-        scrappedObj.workSection = d('section').value;
-        scrappedObj.workingSectionSequence = d('section').dataset.value;
+        scrappedObj.workSection = '';
+        scrappedObj.workingSectionSequence = '';
         ajax('post',URLS + '/jf/zdbg/scrapped/add.json','obj=' + JSON.stringify(scrappedObj),function(data){
-            alern(data.msg);
+            alert(data.msg);
+            location.reload();
         },'','json')
     };
 }

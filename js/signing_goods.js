@@ -17,7 +17,7 @@ d('norm_search_btn').onclick = function(){
     },'','json');
 };
 function reaSh(){
-    ajax('post',URLS + '/jf/zdbg/reportingwork/signingreportdata.json','workcode=' + normSearch.value + '&workcenterCode=' + JSON.parse(sessionStorage.loginUserName).workcenterCode,function(data){
+    ajax('post',URLS + '/jf/zdbg/reportingwork/signingreportdata.json','workcode=' + normSearch.value + '&workcenterCode=' + JSON.parse(sessionStorage.loginUserName).workcenterCode + '&userCode=' + JSON.parse(sessionStorage.loginUserName).userCode,function(data){
         normOne = data.objs;
         if(normOne === undefined||normOne.length <= 0){
             normFootTbodyAppend(normOne);
@@ -68,7 +68,6 @@ function reviewOne(that){
     let reviewArr = JSON.parse(that.parentNode.parentNode.dataset.value);
     reviewArr.signingUserCode = JSON.parse(sessionStorage.loginUserName).userCode;
     ajax('post',URLS + '/jf/zdbg/reportingwork/signing.json','obj=' + JSON.stringify(reviewArr),function(data){
-        alert(JSON.stringify(data));
         alern(data.msg);
         reaSh();
     },'','json');
